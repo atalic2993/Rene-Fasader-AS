@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens
+ *
+ * Palette comes straight from Rene Fasader's own brand: petrol #0C343D
+ * is the only colour in the logo, sand #FFE599 is the accent, and the
+ * greys are the ones used on renefasader.no. Everything else is a tint
+ * derived from those three so the page never leaves the brand.
+ * ------------------------------------------------------------------ */
+
+@theme {
+  --color-petrol: #0c343d;
+  --color-petrol-deep: #071f26;
+  --color-petrol-mid: #12414c;
+  --color-petrol-line: #1d5460;
+  --color-sand: #ffe599;
+  --color-sand-deep: #f2cf6a;
+  --color-bone: #f4f2ed;
+  --color-line: #cacaca;
+  /* Their brand grey #757575 misses AA on the bone ground, so the muted step
+   * is nudged darker and given a petrol tint to stay inside the palette. */
+  --color-muted: #5f6c6f;
+
+  --font-sans: var(--font-general-sans), Helvetica, Arial, sans-serif;
+
+  --text-title: clamp(1.9rem, 1.15rem + 2.9vw, 3.4rem);
+  --text-title--line-height: 1.04;
+  --text-title--letter-spacing: -0.028em;
+
+  --text-heading: clamp(1.35rem, 1.1rem + 0.9vw, 1.75rem);
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.018em;
+
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.3125rem);
+  --text-lead--line-height: 1.55;
+
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the fixed header */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-petrol);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /**
+   * The hero headline carries a place name that can be one short word or four
+   * long ones, so its ceiling is set per page rather than baked into the scale.
+   */
+  .h1-display {
+    font-size: clamp(2.1rem, 1rem + 5.2vw, var(--h1-max, 5.25rem));
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: pretty;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sand);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* On light ground the sand ring alone is too weak, so double it up. */
+  .on-light :focus-visible {
+    outline-color: var(--color-petrol);
+  }
+
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-petrol);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Utilities
+ * ------------------------------------------------------------------ */
+
+@utility shell {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 3.5rem;
+  }
+}
+
+/**
+ * One full screen of hero, minus the sticky header that sits above it.
+ *
+ * svh is the small viewport height: the height with the phone browser's own
+ * bars showing. Using it means the hero never hides its own button behind
+ * Safari's toolbar on first paint. The vh line above is the fallback for
+ * anything that does not know svh, and min-height rather than height so a
+ * short landscape screen grows instead of clipping.
+ */
+@utility hero-screen {
+  min-height: calc(100vh - 4rem);
+  min-height: calc(100svh - 4rem);
+
+  @media (width >= 40rem) {
+    min-height: calc(100vh - 5rem);
+    min-height: calc(100svh - 5rem);
+  }
+}
+
+@utility eyebrow {
+  font-size: var(--text-eyebrow);
+  line-height: 1;
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ *
+ * Scroll reveal
+ *
+ * Elements start slightly low and transparent, then settle once they
+ * enter the viewport. The no-js and reduced-motion paths both land on
+ * the finished state immediately, so nothing is ever hidden by motion.
+ * ------------------------------------------------------------------ */
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Hero elements animate on load rather than on scroll. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  opacity: 0;
+  animation: rise-in 0.85s var(--ease-out-expo) forwards;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+/**
+ * Short phones, where one screen has to hold the whole hero.
+ *
+ * Below roughly 800px of height the photo caption is dropped first: both of
+ * its facts repeat in the proof row directly underneath it, so nothing is
+ * lost, and the photograph gets that height instead of being squeezed into
+ * a letterbox strip. Below 704px the second sentence of the lead and some
+ * padding go too.
+ */
+@media (max-height: 50rem) and (max-width: 64rem) {
+  .hero-caption {
+    display: none;
+  }
+}
+
+@media (max-height: 44rem) and (max-width: 40rem) {
+  .hero-figure {
+    min-height: 6rem;
+  }
+
+  .hero-lead-tail {
+    display: none;
+  }
+
+  .hero-body {
+    padding-top: 1rem;
+    padding-bottom: 0.625rem;
+  }
+
+  .hero-proofs {
+    padding-bottom: 0.75rem;
+  }
+
+  .hero-proofs > ul {
+    padding-top: 0.75rem;
+  }
+}
+
+/* Printed pages never scroll, so nothing may be left waiting on an observer. */
+@media print {
+  .reveal,
+  .rise {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .rise {
+    opacity: 1;
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Form controls
+ * ------------------------------------------------------------------ */
+
+.field {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  border-bottom-color: var(--color-petrol);
+  color: var(--color-petrol);
+  padding: 0.9375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.field::placeholder {
+  color: var(--color-muted);
+  opacity: 0.75;
+}
+
+.field:hover {
+  border-color: var(--color-muted);
+  border-bottom-color: var(--color-petrol);
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--color-petrol);
+  box-shadow: inset 0 -2px 0 0 var(--color-petrol);
+}
+
+.field[aria-invalid="true"] {
+  border-color: #a3341f;
+  border-bottom-color: #a3341f;
+}
