@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 /**
  * Sections that keep their own call to action on a phone. The bar stays down
  * while any of them is on screen, so it never doubles up on a button the
- * visitor is already looking at. Both sections that carry the Fotoklar-pakken
- * label are listed: the package list, which is there to be read, and the form
- * itself, where the bar would otherwise cover the last field.
+ * visitor is already looking at. Only the form is listed: the bar would sit on
+ * top of the last field while someone types. Everywhere else below the hero it
+ * stays up, because on a phone it is the only call to action on the page.
  */
-const quietSections = ["pakken", "skjema"];
+const quietSections = ["skjema"];
 
 /**
  * Mobile only. One action, the same one the whole page points at. Appears once
