@@ -43,20 +43,35 @@ export const proofChips = [
   "Egen lift, ingen stillas",
 ];
 
+/**
+ * The hero. Written to the estate agent who books the photographer, which is
+ * who this campaign is for. The homeowner selling privately is welcome and is
+ * told so further down, but the page is not written to him.
+ */
+export const hero = {
+  eyebrow: "Fotoklar-pakken for meglere",
+  lead: "Du melder inn boligen. Hele veggen vaskes uten høytrykk, helt opp til mønet, på én dag.",
+  leadTail: " Selgeren får fast pris skriftlig før vi starter.",
+};
+
 export const problem = {
-  eyebrow: "Fotodatoen",
-  title: "Bildene av huset tas én gang.",
+  eyebrow: "Fotodagen",
+  title: "Bildene tas én gang, og de bærer hele annonsen.",
   body: [
-    "Megleren har satt en dato for fotografen. Etter den dagen ligger bildene ute så lenge boligen er til salgs, og de kan ikke tas på nytt uten at hele annonsen må gjøres om.",
-    "Fasaden er den største flaten i det første bildet, og det bildet avgjør om folk klikker seg inn eller scroller videre.",
+    "Du setter datoen for fotografen. Etter den dagen ligger bildene ute så lenge boligen er til salgs, og de kan ikke tas på nytt uten at hele annonsen må gjøres om.",
+    "Fasaden er den største flaten i det første bildet, og det bildet avgjør om folk klikker seg inn eller scroller videre. Er veggen grønn og stripete, ser boligen dårligere vedlikeholdt ut enn den er.",
   ],
 };
 
 export const offer = {
   eyebrow: "Fotoklar-pakken",
   title: "Alt dette står klart til fotodagen.",
-  lead: "Én jobb, én dag, én pris. Du bestiller fasadevask, og resten følger med.",
+  lead: "Ett oppdrag, én dag, én pris. Du melder inn boligen, og resten følger med.",
   items: [
+    {
+      title: "Én kontakt fra befaring til ferdig vegg",
+      body: "Du forholder deg til Oliver. Han tar befaringen, kjører liften og gir beskjed når veggen er ferdig.",
+    },
     {
       title: "Komplett fasadevask uten høytrykk",
       body: "Hele huset vaskes på én dag. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft.",
@@ -67,19 +82,19 @@ export const offer = {
     },
     {
       title: "Ingen stillas i hagen",
-      body: "Riggen er inn og ut samme dag. Hagen er ryddig igjen før visningen, ikke om tre uker.",
+      body: "Riggen er inn og ut samme dag. Hagen er ryddig igjen før fotografen kommer, ikke om tre uker.",
     },
     {
       title: "Takrenner rengjort og spylt",
       body: "Inkludert med fasadevasken, ikke bare med takvask. Vi tar dem mens vi likevel står oppe i liften.",
     },
     {
-      title: "Oppstart planlagt mot fotodatoen din",
-      body: "Vi legger jobben etter din dato, ikke etter vår kalender. Derfor spør vi om fotodatoen med en gang.",
+      title: "Oppstart planlagt mot fotodagen",
+      body: "Vi legger jobben etter datoen din, ikke etter vår kalender. Derfor spør vi om fotodagen med en gang.",
     },
     {
-      title: "Du trenger ikke være hjemme",
-      body: "Du trenger heller ikke rydde noe bort. Vi trenger tilgang til vann og litt plass rundt huset.",
+      title: "Ingen trenger å være til stede",
+      body: "Verken du eller selgeren må ta fri. Ingenting skal ryddes bort. Vi trenger tilgang til vann og litt plass rundt boligen.",
     },
   ],
 };
@@ -148,23 +163,23 @@ export const mechanism = {
 };
 
 export const steps = {
-  eyebrow: "Fra skjema til ferdig vegg",
-  title: "Tre steg, og du er ute av det.",
+  eyebrow: "Fra melding til ferdig vegg",
+  title: "Tre steg, og boligen er fotoklar.",
   items: [
     {
       n: "1",
-      title: "Du fyller ut skjemaet",
-      body: "Fem felt. Vi ringer deg raskt, og da spør vi om fotodatoen din.",
+      title: "Du melder inn boligen",
+      body: "Fem felt. Vi ringer deg raskt, og da spør vi om fotodagen.",
     },
     {
       n: "2",
       title: "Vi tar befaringen",
-      body: "Vi kommer innom, eller gjør den digitalt ut fra bilder du sender. Du får fast pris skriftlig etterpå.",
+      body: "Vi kommer innom, eller gjør den digitalt ut fra bilder du sender. Fast pris skriftlig etterpå, som du kan sende videre til selgeren.",
     },
     {
       n: "3",
-      title: "Vi vasker huset",
-      body: "På én dag, planlagt mot fotodatoen din. Du trenger ikke være hjemme.",
+      title: "Vi vasker før fotodagen",
+      body: "På én dag, planlagt mot datoen din. Ingen trenger å være til stede.",
     },
   ],
 };
@@ -182,18 +197,22 @@ export const safety = {
 
 export const faq = {
   eyebrow: "Spørsmål vi får",
-  title: "Det du lurer på før du fyller ut.",
+  title: "Det du lurer på før du melder inn.",
   items: [
     {
       q: "Rekker dere det før fotografen kommer?",
-      a: "Ja, og vi planlegger oppstarten mot din dato. Det er derfor vi spør om fotodatoen med en gang, ikke til slutt. Selve vasken tar én dag.",
+      a: "Ja, og vi planlegger oppstarten mot datoen din. Det er derfor vi spør om fotodagen med en gang, ikke til slutt. Selve vasken tar én dag.",
+    },
+    {
+      q: "Kan jeg melde inn flere boliger?",
+      a: "Ja. Meld inn én bolig av gangen i skjemaet. Hver bolig får sin egen befaring og sin egen faste pris skriftlig.",
     },
     {
       q: "Blir det skader på kledningen eller pussen?",
       a: "Vi vasker uten høytrykk. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft, og det er nettopp derfor kledningen og pussen holder.",
     },
     {
-      q: "Får jeg stillas stående i hagen rett før visning?",
+      q: "Blir det stillas stående i hagen rett før fotografen kommer?",
       a: "Nei. Vi bruker egen lift som kommer inn og ut raskt, så hagen er ryddig igjen samme dag.",
     },
     {
@@ -205,8 +224,12 @@ export const faq = {
       a: "Du får fast pris skriftlig på befaringen, og den prisen står. Befaringen er gratis og uforpliktende, så du kan spørre om prisen uten å binde deg til noe.",
     },
     {
-      q: "Må jeg være hjemme?",
-      a: "Nei. Du trenger verken å være hjemme eller rydde noe bort. Vi trenger bare tilgang til vann og litt plass rundt huset.",
+      q: "Må selgeren være hjemme?",
+      a: "Nei. Verken du eller selgeren trenger å være der, og ingenting skal ryddes bort. Vi trenger bare tilgang til vann og litt plass rundt boligen.",
+    },
+    {
+      q: "Hva om selgeren ikke vil bruke penger på det?",
+      a: "Da har det ikke kostet noe å spørre. Befaringen er gratis og uforpliktende, og selgeren får en fast pris skriftlig å ta stilling til, ikke et anslag.",
     },
     {
       q: "Blir det søl på terrassen og vinduene rett før visning?",
@@ -217,12 +240,12 @@ export const faq = {
       a: `Rene Fasader er et familiedrevet firma fra Oslo. Oliver Olaussen har jobbet med utvendig renhold siden 2011 og er ${championship.title}. Firmaet står oppført som offentlig godkjent renholdsbedrift hos Arbeidstilsynet, og du kan slå opp org.nr. ${site.orgNr} selv.`,
     },
     {
-      q: "Ser megleren og kjøperne egentlig forskjell?",
+      q: "Ser kjøperne egentlig forskjell?",
       a: "Fasaden er den største flaten i det første bildet i boligannonsen, og det bildet avgjør om folk klikker seg inn eller scroller videre. Det er den ene flaten som er verdt å ta før fotografen kommer.",
     },
     {
-      q: "Jeg orker ikke å hente inn tre tilbud.",
-      a: "Da slipper du. Du fyller ut ett skjema, vi ringer deg, og du får én fast pris skriftlig.",
+      q: "Jeg er ikke megler, jeg selger boligen selv.",
+      a: "Det går helt fint. Du bruker det samme skjemaet, får den samme befaringen og den samme faste prisen skriftlig før vi starter.",
     },
   ],
 };
@@ -231,6 +254,9 @@ export const formCopy = {
   eyebrow: "Fotoklar-pakken",
   title: "Få fast pris før fotodagen.",
   lead: befaringLine,
+  /** The one place the private seller is spoken to directly. */
+  note: "Selger du boligen din selv? Bruk det samme skjemaet.",
+  formLead: "Fem felt, og vi ringer deg raskt. Da spør vi om fotodagen.",
   fields: [
     {
       name: "navn",
@@ -259,10 +285,10 @@ export const formCopy = {
     },
     {
       name: "adresse",
-      label: "Adresse",
+      label: "Adressen til boligen",
       type: "text",
       autoComplete: "street-address",
-      placeholder: "Gateadressen til huset",
+      placeholder: "Gateadressen til boligen",
       inputMode: "text" as const,
     },
     {

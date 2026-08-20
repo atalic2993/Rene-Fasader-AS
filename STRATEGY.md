@@ -145,6 +145,27 @@ JavaScript off or when printing.
 - Production build: no console errors, CLS 0.0000, AVIF images, framework
   baseline JavaScript with no added libraries.
 
+## 5b. B2B repositioning, 2026-08-20
+
+The client asked for a B2B focus. Of the four candidate audiences, estate agents
+are the only one that keeps the campaign intact: the agent books the
+photographer, so the photo-date argument lands on the person who controls the
+date, and one agent carries repeat listings instead of one house.
+
+Co-op boards, sameier and commercial buildings were rejected. Section 8 of the
+brief excludes them outright, and boards would put this client head to head
+with Altivon in the same city.
+
+The page now reads to the agent throughout, with the private seller told in two
+places that the same form is his. Every claim on the page is unchanged, because
+the B2B pitch is built only from facts that were already verified: one contact,
+fixed written price, one day, own lift, no scaffolding, nobody needs to be
+present, work planned against the photo date.
+
+**This overrides section 7 of the brief, which is marked LOCKED.** Get that in
+writing from the client before the page goes live, and move the ad targeting at
+the same time.
+
 ## 6. Open items for the client
 
 1. **Facade-washing imagery.** The `research/materiell` assets never arrived.

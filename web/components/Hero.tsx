@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import FacadeGrid from "@/components/FacadeGrid";
 import { CtaButton } from "@/components/ui";
-import { ctaButton, proofChips } from "@/lib/copy";
+import { ctaButton, hero, proofChips } from "@/lib/copy";
 import type { Kommune } from "@/lib/kommuner";
 
 /**
@@ -37,7 +37,7 @@ export default function Hero({ kommune }: { kommune: Kommune }) {
             style={{ "--rise-delay": "60ms" } as React.CSSProperties}
           >
             <span aria-hidden="true" className="inline-block h-px w-8 bg-current" />
-            Fotoklar-pakken
+            {hero.eyebrow}
           </p>
 
           <h1
@@ -62,11 +62,8 @@ export default function Hero({ kommune }: { kommune: Kommune }) {
             className="rise mt-5 max-w-[34rem] text-lead text-white/75 sm:mt-7"
             style={{ "--rise-delay": "220ms" } as React.CSSProperties}
           >
-            Hele huset vaskes uten høytrykk, helt opp til mønet, på én dag.
-            <span className="hero-lead-tail">
-              {" "}
-              Du får fast pris skriftlig på befaringen, og den prisen står.
-            </span>
+            {hero.lead}
+            <span className="hero-lead-tail">{hero.leadTail}</span>
           </p>
 
           <div
@@ -108,7 +105,7 @@ export default function Hero({ kommune }: { kommune: Kommune }) {
               Oliver Olaussen på jobb i høyden i Oslo. Norgesmester i vinduspuss
               2023
               <span className="hidden sm:inline">
-                , og mannen som kommer på befaring hos deg
+                , og mannen som tar befaringen
               </span>
               .
             </span>

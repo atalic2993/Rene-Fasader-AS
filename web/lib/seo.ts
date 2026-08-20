@@ -6,7 +6,7 @@ import { site } from "./site";
 
 export function pageMetadata(kommune: Kommune, path: string): Metadata {
   const title = `Fasadevask i ${kommune.name} før fotografen kommer | ${site.shortName}`;
-  const description = `Fasadevask uten høytrykk i ${kommune.name}. Hele huset rent, helt opp til mønet, på én dag. Fast pris skriftlig på befaringen. Utført av Norgesmester i vinduspuss 2023.`;
+  const description = `For meglere i ${kommune.name}: fasadevask uten høytrykk før fotodagen. Hele boligen ren, helt opp til mønet, på én dag, med fast pris skriftlig før vi starter. Utført av Norgesmester i vinduspuss 2023.`;
   const url = `${site.baseUrl}${path}`;
 
   return {
