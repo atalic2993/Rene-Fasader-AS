@@ -304,7 +304,12 @@ export const formCopy = {
 };
 
 export const footerCopy = {
+  /** Phones get the areas in the tagline, because they have no areas column. */
   tagline: `Fasadevask uten høytrykk i ${areaList}.`,
+  /** From sm the areas stand in their own column, so the tagline stops listing them. */
+  taglineWide: "Fasadevask uten høytrykk, før fotografen kommer.",
+  contactLabel: "Kontakt",
+  areasLabel: "Vi jobber i",
   privacyLabel: "Personvern",
 };
 
