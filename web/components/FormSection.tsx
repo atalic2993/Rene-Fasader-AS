@@ -19,7 +19,7 @@ export default function FormSection({ kommune }: { kommune: Kommune }) {
             <Eyebrow className="text-sand">{formCopy.eyebrow}</Eyebrow>
             <h2 className="mt-4 text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)] font-semibold leading-[1.08] tracking-[-0.025em] sm:mt-5">
               Fasadevask i {kommune.name},
-              <span className="block text-sand">ferdig før fotodagen.</span>
+              <span className="block text-sand">til datoen dere setter.</span>
             </h2>
             <p className="mt-4 max-w-[32rem] text-lead text-white/75 sm:mt-5">
               {befaringLine}

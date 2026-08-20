@@ -24,7 +24,7 @@ export default function PriceBlock() {
               <Eyebrow className="text-white/60">Befaringen</Eyebrow>
               <p className="mt-4 text-lead text-white/80 sm:mt-6">{befaringLine}</p>
               <p className="mt-4 text-sm text-white/60 sm:mt-6">
-                Vi ser boligen før vi setter prisen. Derfor kan prisen stå.
+                Vi ser eiendommen før vi setter prisen. Derfor kan prisen stå.
               </p>
             </div>
           </div>

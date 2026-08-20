@@ -54,7 +54,7 @@ export default function Hero({ kommune }: { kommune: Kommune }) {
               Fasadevask i <span className="text-sand">{kommune.name}</span>
             </span>
             <span className="block font-normal text-white/85">
-              før fotografen kommer.
+              helt opp, på én dag.
             </span>
           </h1>
 

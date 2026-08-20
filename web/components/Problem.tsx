@@ -3,8 +3,8 @@ import { Eyebrow } from "@/components/ui";
 import { problem } from "@/lib/copy";
 
 /**
- * One short beat on the deadline, then straight on to the solution. The
- * homeowner already knows the wall is dirty, so nothing here explains algae.
+ * One short beat on the problem, then straight on to the solution. The
+ * reader already knows the wall is dirty, so nothing here explains algae.
  */
 export default function Problem() {
   return (

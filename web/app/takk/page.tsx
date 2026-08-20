@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Not an end point. Its job is to make sure the homeowner actually answers
+ * Not an end point. Its job is to make sure the caller actually answers
  * when Oliver calls from an unknown number.
  */
 export default function TakkPage() {

@@ -5,8 +5,8 @@ import { areaList, kommuner, type Kommune } from "./kommuner";
 import { site } from "./site";
 
 export function pageMetadata(kommune: Kommune, path: string): Metadata {
-  const title = `Fasadevask for meglere i ${kommune.name}, før fotodagen | ${site.shortName}`;
-  const description = `For meglere i ${kommune.name}: fasadevask uten høytrykk før fotodagen. Hele boligen ren, helt opp til mønet, på én dag, med fast pris skriftlig før vi starter. Utført av Norgesmester i vinduspuss 2023.`;
+  const title = `Fasadevask i ${kommune.name} uten høytrykk | ${site.shortName}`;
+  const description = `Fasadevask i ${kommune.name} for forvaltere, utleiere og meglere. Hele fasaden ren, helt opp til mønet, på én dag, med fast pris skriftlig før vi starter. Egen lift, ingen stillas.`;
   const url = `${site.baseUrl}${path}`;
 
   return {
@@ -73,7 +73,7 @@ export function jsonLd(kommune: Kommune, path: string) {
     "@type": "WebPage",
     "@id": `${site.baseUrl}${path}#side`,
     url: `${site.baseUrl}${path}`,
-    name: `Fasadevask i ${kommune.name} før fotografen kommer`,
+    name: `Fasadevask i ${kommune.name} for forvaltere, utleiere og meglere`,
     inLanguage: "nb-NO",
     isPartOf: { "@id": `${site.baseUrl}/#organisasjon` },
   };

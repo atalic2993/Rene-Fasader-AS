@@ -4,16 +4,34 @@ import { championship, site } from "./site";
 /**
  * All page copy lives here.
  *
- * Lines marked LOCKED are copied verbatim from the campaign brief and must not
- * be reworded, split or translated. Rules that apply to everything below:
- * banned words are "garanti"/"garantert", "softwash" and "skånsom"; no price
- * figure and no discount percentage appears anywhere; sentences are joined with
- * a comma or a full stop, never a dash.
+ * Rules that apply to everything below: banned words are "garanti"/"garantert",
+ * "softwash" and "skånsom"; no price figure and no discount percentage appears
+ * anywhere; sentences are joined with a comma or a full stop, never a dash.
+ *
+ * AUDIENCE, 2026-08-20. Neutral B2B fasadevask. The reader manages or sells
+ * property for a living: eiendomsforvaltere, utleiere, boligutviklere and
+ * meglere. The estate-agent photo date is no longer the campaign's spine. It
+ * survives only as the scheduling mechanism, "we plan the start against your
+ * date", which is true for every one of those buyers.
+ *
+ * Form of address, and it is easy to get wrong: "dere/deres" about the company
+ * and the property, "deg" only about the person we ring. Never "boligen din".
+ * The reader is responsible for the building, they do not live in it.
+ *
+ * THIS OVERRIDES §7 AND §8 OF THE LOCKED BRIEF, on the client's own message of
+ * 2026-08-20 ("focus more only on fasadevask for B2B ... just make it more
+ * neutral fasadevask B2B focused"). Three lines the brief marks LOCKED are
+ * reworded below and each one is flagged where it stands. All of it needs the
+ * client's written sign-off.
  */
 
-/** LOCKED, copy verbatim. The campaign message DNA. */
+/**
+ * Was LOCKED. The campaign message DNA. Reworded 2026-08-20: the first sentence
+ * read "Fasadevasken er ferdig før fotografen kommer". The deadline is now the
+ * reader's own date rather than a photographer's. The rest is untouched.
+ */
 export const dnaSentence =
-  "Fasadevasken er ferdig før fotografen kommer. Hele veggen ren, helt opp, på én dag, med fast pris skriftlig før vi starter.";
+  "Fasadevasken er ferdig til datoen dere setter. Hele veggen ren, helt opp, på én dag, med fast pris skriftlig før vi starter.";
 
 /** LOCKED, copy verbatim. Price framing. */
 export const priceFraming =
@@ -24,12 +42,14 @@ export const befaringLine =
   "Befaringen er gratis og uforpliktende. Vi kan komme innom, eller gjøre den digitalt ut fra bilder du sender. Du får fast pris skriftlig etterpå, og velger selv om du vil gå videre.";
 
 /**
- * LOCKED, otherwise verbatim. Two words changed on 2026-08-20 for the B2B
- * rewrite: the photographer visits the seller, not the estate agent reading
- * this. Needs the same written client sign-off as the audience change in §7.
- * Original ending: "etter at fotografen har vært hos deg".
+ * Was LOCKED. Reworded 2026-08-20. The count of 15 and the "first come" logic
+ * are the brief's and stay. What changed is the consequence: the original said
+ * the next free start falls after the photographer has been, which only means
+ * something to an estate agent. The replacement is the season, which is a
+ * physical fact rather than a claim, since facade washing needs temperatures
+ * above freezing.
  */
-export const scarcityLine = `Vi tar inn 15 fasadevask-jobber i ${areaList} denne måneden. Er de fylt, står neste ledige oppstart etter at fotografen har vært hos selgeren, og da er bildene tatt på et hus som ikke er vasket.`;
+export const scarcityLine = `Vi tar inn 15 fasadevask-jobber i ${areaList} denne måneden, i den rekkefølgen henvendelsene kommer. Fasadevask krever plussgrader, så når nettene faller under frysepunktet stopper vi til våren, og fasaden står som den står til da.`;
 
 /** LOCKED, copy verbatim. Thank-you page. */
 export const takkLines = [
@@ -40,7 +60,15 @@ export const takkLines = [
 /** LOCKED. The call to action line that sits directly above the form. */
 export const ctaLine = "Fyll ut skjemaet under 👇";
 
-export const ctaButton = "Få fast pris før fotodagen";
+/**
+ * Was LOCKED as "Få fast pris før fotodagen". Reworded 2026-08-20 with the rest
+ * of the photo-day framing. Says the same thing to every B2B buyer.
+ *
+ * Kept short on purpose. This string is also the label on the sticky bar and on
+ * the submit button, and anything longer wraps to three lines inside the hero
+ * button at 320px, which pushes the hero off one screen.
+ */
+export const ctaButton = "Få fast pris skriftlig";
 
 export const proofChips = [
   championship.title,
@@ -49,56 +77,61 @@ export const proofChips = [
 ];
 
 /**
- * The hero. Written to the estate agent who books the photographer, which is
- * the only audience this page addresses.
+ * The hero. Written to whoever is responsible for the building, not to whoever
+ * lives in it.
  */
 export const hero = {
-  eyebrow: "Fotoklar-pakken for meglere",
-  lead: "Du melder inn boligen. Hele veggen vaskes uten høytrykk, helt opp til mønet, på én dag.",
-  leadTail: " Selgeren får fast pris skriftlig før vi starter.",
+  /**
+   * Kept to one line down to 360px. Every extra word here wraps the eyebrow and
+   * pushes the hero past one screen on a small phone, so a fourth segment does
+   * not go in this line, it goes in the FAQ.
+   */
+  eyebrow: "Forvaltere, utleiere og meglere",
+  lead: "Dere melder inn eiendommen. Hele fasaden vaskes uten høytrykk, med egen lift.",
+  leadTail: " Fast pris skriftlig før vi starter.",
 };
 
 export const problem = {
-  eyebrow: "Fotodagen",
-  title: "Bildene tas én gang, og de bærer hele annonsen.",
+  eyebrow: "Utfordringen",
+  title: "Fasaden er det første alle ser, og det siste noen rekker å ta tak i.",
   body: [
-    "Du setter datoen for fotografen. Etter den dagen ligger bildene ute så lenge boligen er til salgs, og de kan ikke tas på nytt uten at hele annonsen må gjøres om.",
-    "Fasaden er den største flaten i det første bildet, og det bildet avgjør om folk klikker seg inn eller scroller videre. Er veggen grønn og stripete, ser boligen dårligere vedlikeholdt ut enn den er.",
+    "Begroing kommer tilbake hvert år, verst på nordveggen. Den gjør at en eiendom som faktisk er godt vedlikeholdt, ser dårligere vedlikeholdt ut enn den er, og det inntrykket fester seg hos leietakere, kjøpere og eiere.",
+    "Selve vasken er sjelden det som stopper jobben. Det er koordineringen: stillas som skal stå, flere leverandører som skal inn, og en dato som må holde. Her melder dere inn adressen og får én dato og én pris tilbake.",
   ],
 };
 
 export const offer = {
-  eyebrow: "Fotoklar-pakken",
-  title: "Alt dette står klart til fotodagen.",
-  lead: "Ett oppdrag, én dag, én pris. Du melder inn boligen, og resten følger med.",
+  eyebrow: "Oppdraget",
+  title: "Alt dette ligger i én dato.",
+  lead: "Ett oppdrag, én dag, én pris. Dere melder inn eiendommen, og resten følger med.",
   items: [
     {
       title: "Én kontakt fra befaring til ferdig vegg",
-      body: "Du forholder deg til Oliver. Han tar befaringen, kjører liften og gir beskjed når veggen er ferdig.",
+      body: "Dere forholder dere til Oliver. Han tar befaringen, kjører liften og gir beskjed når veggen er ferdig.",
     },
     {
       title: "Komplett fasadevask uten høytrykk",
-      body: "Hele boligen vaskes på én dag. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft.",
+      body: "Hele fasaden vaskes på én dag. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft.",
     },
     {
       title: "Egen lift, hele veggen helt opp",
       body: "Vi eier liften selv og kjenner den godt. Den gir tilkomst til hele fasaden, også toppen og gavlen på baksiden.",
     },
     {
-      title: "Ingen stillas i hagen",
-      body: "Riggen er inn og ut samme dag. Hagen er ryddig igjen før fotografen kommer, ikke om tre uker.",
+      title: "Ingen stillas som blir stående",
+      body: "Riggen er inn og ut samme dag. Uteområdet er ryddig igjen samme kveld, ikke om tre uker.",
     },
     {
       title: "Takrenner rengjort og spylt",
       body: "Inkludert med fasadevasken, ikke bare med takvask. Vi tar dem mens vi likevel står oppe i liften.",
     },
     {
-      title: "Oppstart planlagt mot fotodagen",
-      body: "Vi legger jobben etter datoen din, ikke etter vår kalender. Derfor spør vi om fotodagen med en gang.",
+      title: "Oppstart planlagt mot datoen deres",
+      body: "Vi legger jobben etter datoen dere trenger den ferdig, ikke etter vår kalender. Derfor spør vi om datoen med en gang.",
     },
     {
       title: "Ingen trenger å være til stede",
-      body: "Verken du eller selgeren trenger å ta fri. Ingenting skal ryddes bort. Vi trenger tilgang til vann og litt plass rundt boligen.",
+      body: "Verken dere eller den som bor der trenger å ta fri. Ingenting skal ryddes bort. Vi trenger tilgang til vann og litt plass rundt bygget.",
     },
   ],
 };
@@ -119,7 +152,7 @@ export const socialProof = {
   },
   approval: {
     title: "Offentlig godkjent renholdsbedrift",
-    body: `Rene Fasader AS står oppført hos Arbeidstilsynet under org.nr. ${site.orgNr}. Godkjenningen ligger åpent i registeret, så du kan slå den opp selv.`,
+    body: `Rene Fasader AS står oppført hos Arbeidstilsynet under org.nr. ${site.orgNr}. Godkjenningen ligger åpent i registeret, så dere kan slå den opp selv.`,
   },
   team: {
     title: "Tre navn, samme etternavn",
@@ -156,7 +189,7 @@ export const mechanism = {
     {
       index: "02",
       title: "Egen lift",
-      body: "Liften er grunnen til at vi tar hele fasaden, også der ingen kommer til fra bakken. Vi kjenner den godt, og vi trenger ikke leie den inn når din dato nærmer seg.",
+      body: "Liften er grunnen til at vi tar hele fasaden, også der ingen kommer til fra bakken. Vi kjenner den godt, og vi trenger ikke leie den inn når datoen deres nærmer seg.",
     },
     {
       index: "03",
@@ -168,22 +201,22 @@ export const mechanism = {
 
 export const steps = {
   eyebrow: "Fra melding til ferdig vegg",
-  title: "Tre steg, og boligen er fotoklar.",
+  title: "Tre steg, og fasaden er ren.",
   items: [
     {
       n: "1",
-      title: "Du melder inn boligen",
-      body: "Navn, telefon, e-post og adressen til boligen. Vi ringer deg raskt, og da spør vi om fotodagen.",
+      title: "Dere melder inn eiendommen",
+      body: "Navn, telefon, e-post og adressen til eiendommen. Vi ringer raskt, og da spør vi når den må være ferdig.",
     },
     {
       n: "2",
       title: "Vi tar befaringen",
-      body: "Vi kommer innom, eller gjør den digitalt ut fra bilder du sender. Fast pris skriftlig etterpå, som du kan sende videre til selgeren.",
+      body: "Vi kommer innom, eller gjør den digitalt ut fra bilder dere sender. Fast pris skriftlig etterpå, som dere kan legge frem for den som skal godkjenne den.",
     },
     {
       n: "3",
-      title: "Vi vasker før fotodagen",
-      body: "På én dag, planlagt mot datoen din. Ingen trenger å være til stede.",
+      title: "Vi vasker på én dag",
+      body: "Planlagt mot datoen deres. Ingen trenger å være til stede.",
     },
   ],
 };
@@ -193,7 +226,7 @@ export const safety = {
   title: "Det som er avtalt, er det som står.",
   items: [
     "Fast pris skriftlig før vi starter, uten tillegg etterpå",
-    "Befaring uten forpliktelser, verken du eller selgeren er bundet til noe",
+    "Befaring uten forpliktelser, verken dere eller eieren er bundet til noe",
     `Offentlig godkjent renholdsbedrift hos Arbeidstilsynet, org.nr. ${site.orgNr}`,
     "Vi rydder etter oss og spyler ned det vi har brukt",
   ],
@@ -201,23 +234,27 @@ export const safety = {
 
 export const faq = {
   eyebrow: "Spørsmål vi får",
-  title: "Det du lurer på før du melder inn.",
+  title: "Det dere lurer på før dere melder inn.",
   items: [
     {
-      q: "Rekker dere det før fotografen kommer?",
-      a: "Ja, og vi planlegger oppstarten mot datoen din. Det er derfor vi spør om fotodagen med en gang, ikke til slutt. Selve vasken tar én dag.",
+      q: "Hvor store bygg tar dere?",
+      a: "Vi vasker med egen lift, og et normalt småhus tar én dag. Er bygget større eller høyere enn liften rekker, sier vi fra på befaringen i stedet for å love en dato vi ikke kommer til å holde.",
     },
     {
-      q: "Kan jeg melde inn flere boliger?",
-      a: "Ja. Meld inn én bolig om gangen i skjemaet. Hver bolig får sin egen befaring og sin egen faste pris skriftlig.",
+      q: "Rekker dere det til datoen vi trenger?",
+      a: "Vi planlegger oppstarten mot datoen deres, og det er derfor vi spør om den med en gang og ikke til slutt. Selve vasken tar én dag.",
+    },
+    {
+      q: "Kan vi melde inn flere eiendommer?",
+      a: "Ja. Meld inn én adresse om gangen i skjemaet. Hver eiendom får sin egen befaring og sin egen faste pris skriftlig.",
     },
     {
       q: "Blir det skader på kledningen eller pussen?",
       a: "Vi vasker uten høytrykk. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft, og det er nettopp derfor kledningen og pussen holder.",
     },
     {
-      q: "Blir det stillas stående i hagen rett før fotografen kommer?",
-      a: "Nei. Vi bruker egen lift som kommer inn og ut raskt, så hagen er ryddig igjen samme dag.",
+      q: "Blir det stillas stående etter at dere er ferdige?",
+      a: "Nei. Vi bruker egen lift som kommer inn og ut raskt, så uteområdet er ryddig igjen samme dag.",
     },
     {
       q: "Kommer dere helt opp under mønet, eller blir toppen skitten?",
@@ -225,36 +262,36 @@ export const faq = {
     },
     {
       q: "Hva koster det?",
-      a: "Du får fast pris skriftlig på befaringen, og den prisen står. Befaringen er gratis og uforpliktende, så du kan spørre om prisen uten å binde deg til noe.",
+      a: "Dere får fast pris skriftlig på befaringen, og den prisen står. Befaringen er gratis og uforpliktende, så dere kan spørre om prisen uten å binde dere til noe.",
     },
     {
-      q: "Må selgeren være hjemme?",
-      a: "Nei. Verken du eller selgeren trenger å være der, og ingenting skal ryddes bort. Vi trenger bare tilgang til vann og litt plass rundt boligen.",
+      q: "Må noen være til stede mens dere jobber?",
+      a: "Nei. Verken dere eller den som bor der trenger å være der, og ingenting skal ryddes bort. Vi trenger bare tilgang til vann og litt plass rundt bygget.",
     },
     {
-      q: "Hva om selgeren ikke vil bruke penger på det?",
-      a: "Da har det ikke kostet noe å spørre. Befaringen er gratis og uforpliktende, og selgeren får en fast pris skriftlig å ta stilling til, ikke et anslag.",
+      q: "Hva om eieren ikke vil bruke penger på det?",
+      a: "Da har det ikke kostet noe å spørre. Befaringen er gratis og uforpliktende, og dere sitter igjen med en fast pris skriftlig å legge frem, ikke et anslag.",
     },
     {
-      q: "Blir det søl på terrassen og vinduene rett før visning?",
+      q: "Blir det søl på terrassen og vinduene?",
       a: "Vi rydder etter oss og spyler ned det vi har brukt. Terrassen og vinduene ser bedre ut når vi drar enn da vi kom.",
     },
     {
-      q: "Hvem er dere?",
-      a: `Rene Fasader er et familiedrevet firma fra Oslo. Oliver Olaussen har jobbet med utvendig renhold siden 2011 og er ${championship.title}. Firmaet står oppført som offentlig godkjent renholdsbedrift hos Arbeidstilsynet, og du kan slå opp org.nr. ${site.orgNr} selv.`,
+      q: "Når på året kan dere vaske?",
+      a: "Fasadevask krever plussgrader. Vi vasker fra våren til nettene faller under frysepunktet om høsten, og da tar vi pause til våren igjen.",
     },
     {
-      q: "Ser kjøperne egentlig forskjell?",
-      a: "Fasaden er den største flaten i det første bildet i boligannonsen, og det bildet avgjør om folk klikker seg inn eller scroller videre. Det er den ene flaten som er verdt å ta før fotografen kommer.",
+      q: "Hvem er dere?",
+      a: `Rene Fasader er et familiedrevet firma fra Oslo. Oliver Olaussen har jobbet med utvendig renhold siden 2011 og er ${championship.title}. Firmaet står oppført som offentlig godkjent renholdsbedrift hos Arbeidstilsynet, og dere kan slå opp org.nr. ${site.orgNr} selv.`,
     },
   ],
 };
 
 export const formCopy = {
-  eyebrow: "Fotoklar-pakken",
-  title: "Få fast pris før fotodagen.",
+  eyebrow: "Fasadevask",
+  title: "Få fast pris på fasadevasken.",
   lead: befaringLine,
-  formLead: "Fem felt, og vi ringer deg raskt. Da spør vi om fotodagen.",
+  formLead: "Fem felt, og vi ringer deg raskt. Da spør vi når fasaden må være ferdig.",
   fields: [
     {
       name: "navn",
@@ -283,10 +320,10 @@ export const formCopy = {
     },
     {
       name: "adresse",
-      label: "Adressen til boligen",
+      label: "Adressen til eiendommen",
       type: "text",
       autoComplete: "street-address",
-      placeholder: "Gateadressen til boligen",
+      placeholder: "Gateadressen til eiendommen",
       inputMode: "text" as const,
     },
     {
@@ -307,7 +344,7 @@ export const footerCopy = {
   /** Phones get the areas in the tagline, because they have no areas column. */
   tagline: `Fasadevask uten høytrykk i ${areaList}.`,
   /** From sm the areas stand in their own column, so the tagline stops listing them. */
-  taglineWide: "Fasadevask uten høytrykk, før fotografen kommer.",
+  taglineWide: "Fasadevask uten høytrykk, hele veggen helt opp, på én dag.",
   contactLabel: "Kontakt",
   areasLabel: "Vi jobber i",
   privacyLabel: "Personvern",
@@ -335,7 +372,7 @@ export const privacy = {
     {
       h: "Hva vi samler inn",
       body: [
-        "Skjemaet har fem felt: navn, telefonnummer, e-postadresse, adressen til boligen som skal vaskes og postnummer.",
+        "Skjemaet har fem felt: navn, telefonnummer, e-postadresse, adressen til eiendommen som skal vaskes og postnummer.",
         "I tillegg lagres hvilken side skjemaet ble sendt fra og tidspunktet det kom inn. Vi ber aldri om fødselsnummer eller betalingsopplysninger i skjemaet.",
       ],
     },

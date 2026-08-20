@@ -20,11 +20,11 @@ const generalSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.baseUrl),
   title: {
-    default: `Fasadevask før fotografen kommer | ${site.shortName}`,
+    default: `Fasadevask uten høytrykk i Oslo og omegn | ${site.shortName}`,
     template: `%s | ${site.shortName}`,
   },
   description:
-    "Fasadevask uten høytrykk. Hele huset rent, helt opp til mønet, på én dag, med fast pris skriftlig på befaringen.",
+    "Fasadevask uten høytrykk for forvaltere, utleiere og meglere. Hele fasaden ren, helt opp til mønet, på én dag, med fast pris skriftlig på befaringen.",
   applicationName: site.name,
   authors: [{ name: site.name, url: site.mainSite }],
   formatDetection: { telephone: true, address: false, email: false },

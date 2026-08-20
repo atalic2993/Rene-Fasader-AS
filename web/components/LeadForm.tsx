@@ -60,7 +60,7 @@ function validate(values: Record<string, string>): Errors {
   }
 
   if (values.adresse.trim().length < 4) {
-    errors.adresse = "Skriv inn adressen til boligen som skal vaskes.";
+    errors.adresse = "Skriv inn adressen til eiendommen som skal vaskes.";
   }
 
   if (!/^\d{4}$/.test(values.postnummer.trim())) {

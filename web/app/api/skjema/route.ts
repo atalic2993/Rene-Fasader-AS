@@ -95,7 +95,7 @@ export async function POST(request: Request) {
 
   const payload = {
     ...lead,
-    kampanje: "Fotoklar-pakken",
+    kampanje: "Fasadevask B2B",
     tjeneste: "Fasadevask",
     mottatt: new Date().toISOString(),
   };

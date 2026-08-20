@@ -1,7 +1,14 @@
-# Rene Fasader AS, Fotoklar-pakken
+# Rene Fasader AS, fasadevask campaign
 
 Campaign landing page for facade washing (fasadevask) in Oslo, Bærum, Sandvika,
 Asker and Lillestrøm. One page, one service, one conversion action.
+
+Written to a B2B reader: eiendomsforvaltere, utleiere, boligutviklere and
+meglere. Address them as "dere/deres" about the company and the building, and
+"deg" only about the person we ring. Never "boligen din", the reader is
+responsible for the property rather than living in it. The rules that govern
+every string, including the three formerly locked lines that were reworded on
+2026-08-20, are at the top of `lib/copy.ts`.
 
 ## Stack
 

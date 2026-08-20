@@ -6,7 +6,7 @@ import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
 export const alt =
-  "Fasadevask for meglere før fotografen kommer. Rene Fasader AS, fasadevask uten høytrykk i Oslo og omegn.";
+  "Rene Fasader AS, fasadevask uten høytrykk i Oslo og omegn, for forvaltere, utleiere og meglere.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -44,7 +44,7 @@ export default async function OpengraphImage() {
               fontWeight: 600,
             }}
           >
-            Fotoklar-pakken for meglere
+            For forvaltere, utleiere og meglere
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default async function OpengraphImage() {
               maxWidth: "900px",
             }}
           >
-            Fasadevask før fotografen kommer.
+            Fasadevask uten høytrykk, på én dag.
           </div>
           <div
             style={{

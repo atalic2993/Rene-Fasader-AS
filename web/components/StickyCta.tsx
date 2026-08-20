@@ -75,7 +75,7 @@ export default function StickyCta() {
           href="#skjema"
           className="flex h-12 w-full items-center justify-center bg-sand px-5 text-[0.9375rem] font-semibold text-petrol"
         >
-          Få fast pris før fotodagen
+          Få fast pris skriftlig
         </a>
       </div>
     </aside>

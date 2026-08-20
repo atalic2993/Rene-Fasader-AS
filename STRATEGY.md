@@ -169,6 +169,55 @@ present, work planned against the photo date.
 writing from the client before the page goes live, and move the ad targeting at
 the same time.
 
+## 5c. Neutral B2B, 2026-08-21
+
+The client read the estate-agent version and said it was "very photograf day
+focused", asking for something closer to Altivon: neutral fasadevask aimed at
+B2B. So the photo date is no longer the campaign's spine.
+
+**Who the page speaks to now.** Eiendomsforvaltere, utleiere, boligutviklere and
+meglere, in one group. Not a single named vertical, because the reader's job
+title varies while the thing being bought does not.
+
+Altivon's own segments, sameier and borettslag and næringseiendom, were
+considered and rejected a second time, for a reason that has nothing to do with
+the brief. Rene Fasader washes with one lift and their own copy says a normal
+small house takes a day. Selling apartment blocks would be selling reach they
+have not shown they have. A new FAQ entry says this out loud: if the building is
+taller than the lift reaches, they say so at the site visit instead of promising
+a date. That answer costs a few enquiries and saves every bad one.
+
+**What the photo date became.** A scheduling mechanism and nothing more. The
+page still says the start is planned against the date you give us, which is true
+whether that date is a photo shoot, a tenant moving in, a board meeting or a
+handover. Everything that only made sense to an estate agent is gone.
+
+**Three lines the brief marks LOCKED were reworded**, each flagged in
+`web/lib/copy.ts` where it stands:
+
+| Line | Before | After |
+| --- | --- | --- |
+| Message DNA | "ferdig før fotografen kommer" | "ferdig til datoen dere setter" |
+| Scarcity | next slot falls after the photographer has been | next slot falls into the season, and washing needs temperatures above freezing |
+| CTA button | "Få fast pris før fotodagen" | "Få fast pris skriftlig" |
+
+The scarcity rewrite is the one worth defending: the count of 15 and the
+first-come logic are the brief's and are untouched. What replaced the
+photographer is the weather, which is a fact rather than a claim.
+
+**Form of address changed with the audience.** "Dere/deres" about the company
+and the building, "deg" only about the person we ring. The reader is responsible
+for the property, they do not live in it. Grep for "boligen din" before shipping
+any new copy.
+
+**No new claims were introduced.** Every proof on the page was already verified:
+one contact, fixed written price, one day, own lift, no scaffolding, gutters
+included, nobody needs to be present.
+
+**This overrides sections 7 and 8 of the brief and edits three LOCKED lines.**
+It needs the client's written sign-off, and the ad targeting has to move with
+it: the ads still point at homeowners.
+
 ## 6. Open items for the client
 
 1. **Facade-washing imagery.** The `research/materiell` assets never arrived.
@@ -180,7 +229,14 @@ the same time.
    marketing, which stops being true the day a Meta pixel is added.
 3. **`LEAD_WEBHOOK_URL`.** Must be set in Vercel before the first ad runs, or
    leads will not reach the CRM.
-4. **Photo date field.** The brief locks the form to exactly five fields, while
-   the objection answers say the photo date is asked for straight away. The page
-   keeps the five locked fields and states in two places that the date is the
-   first thing asked on the call. Say the word if it should become a sixth field.
+4. **Deadline field.** The brief locks the form to exactly five fields, while the
+   page says in two places that the first thing asked on the call is when the
+   facade has to be finished. The five locked fields stand. Say the word if that
+   date should become a sixth field.
+5. **Three questions the page still cannot answer**, all of them B2B: who gets
+   invoiced when a manager orders on an owner's behalf, whether several
+   addresses can be handed over at once rather than one at a time, and whether
+   any managing agent may be named as a reference.
+6. **How high does the lift actually reach?** The page now promises to say so at
+   the site visit rather than guess. A number here would let the page qualify
+   harder and waste fewer site visits.
