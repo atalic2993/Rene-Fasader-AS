@@ -23,8 +23,13 @@ export const priceFraming =
 export const befaringLine =
   "Befaringen er gratis og uforpliktende. Vi kan komme innom, eller gjøre den digitalt ut fra bilder du sender. Du får fast pris skriftlig etterpå, og velger selv om du vil gå videre.";
 
-/** LOCKED, copy verbatim. Scarcity. */
-export const scarcityLine = `Vi tar inn 15 fasadevask-jobber i ${areaList} denne måneden. Er de fylt, står neste ledige oppstart etter at fotografen har vært hos deg, og da er bildene tatt på et hus som ikke er vasket.`;
+/**
+ * LOCKED, otherwise verbatim. Two words changed on 2026-08-20 for the B2B
+ * rewrite: the photographer visits the seller, not the estate agent reading
+ * this. Needs the same written client sign-off as the audience change in §7.
+ * Original ending: "etter at fotografen har vært hos deg".
+ */
+export const scarcityLine = `Vi tar inn 15 fasadevask-jobber i ${areaList} denne måneden. Er de fylt, står neste ledige oppstart etter at fotografen har vært hos selgeren, og da er bildene tatt på et hus som ikke er vasket.`;
 
 /** LOCKED, copy verbatim. Thank-you page. */
 export const takkLines = [
@@ -45,8 +50,7 @@ export const proofChips = [
 
 /**
  * The hero. Written to the estate agent who books the photographer, which is
- * who this campaign is for. The homeowner selling privately is welcome and is
- * told so further down, but the page is not written to him.
+ * the only audience this page addresses.
  */
 export const hero = {
   eyebrow: "Fotoklar-pakken for meglere",
@@ -74,7 +78,7 @@ export const offer = {
     },
     {
       title: "Komplett fasadevask uten høytrykk",
-      body: "Hele huset vaskes på én dag. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft.",
+      body: "Hele boligen vaskes på én dag. Det er lavt trykk og riktig middel som løsner begroingen, ikke kraft.",
     },
     {
       title: "Egen lift, hele veggen helt opp",
@@ -94,7 +98,7 @@ export const offer = {
     },
     {
       title: "Ingen trenger å være til stede",
-      body: "Verken du eller selgeren må ta fri. Ingenting skal ryddes bort. Vi trenger tilgang til vann og litt plass rundt boligen.",
+      body: "Verken du eller selgeren trenger å ta fri. Ingenting skal ryddes bort. Vi trenger tilgang til vann og litt plass rundt boligen.",
     },
   ],
 };
@@ -169,7 +173,7 @@ export const steps = {
     {
       n: "1",
       title: "Du melder inn boligen",
-      body: "Fem felt. Vi ringer deg raskt, og da spør vi om fotodagen.",
+      body: "Navn, telefon, e-post og adressen til boligen. Vi ringer deg raskt, og da spør vi om fotodagen.",
     },
     {
       n: "2",
@@ -189,7 +193,7 @@ export const safety = {
   title: "Det som er avtalt, er det som står.",
   items: [
     "Fast pris skriftlig før vi starter, uten tillegg etterpå",
-    "Befaring uten forpliktelser, du velger selv om du går videre",
+    "Befaring uten forpliktelser, verken du eller selgeren er bundet til noe",
     `Offentlig godkjent renholdsbedrift hos Arbeidstilsynet, org.nr. ${site.orgNr}`,
     "Vi rydder etter oss og spyler ned det vi har brukt",
   ],
@@ -205,7 +209,7 @@ export const faq = {
     },
     {
       q: "Kan jeg melde inn flere boliger?",
-      a: "Ja. Meld inn én bolig av gangen i skjemaet. Hver bolig får sin egen befaring og sin egen faste pris skriftlig.",
+      a: "Ja. Meld inn én bolig om gangen i skjemaet. Hver bolig får sin egen befaring og sin egen faste pris skriftlig.",
     },
     {
       q: "Blir det skader på kledningen eller pussen?",
@@ -243,10 +247,6 @@ export const faq = {
       q: "Ser kjøperne egentlig forskjell?",
       a: "Fasaden er den største flaten i det første bildet i boligannonsen, og det bildet avgjør om folk klikker seg inn eller scroller videre. Det er den ene flaten som er verdt å ta før fotografen kommer.",
     },
-    {
-      q: "Jeg er ikke megler, jeg selger boligen selv.",
-      a: "Det går helt fint. Du bruker det samme skjemaet, får den samme befaringen og den samme faste prisen skriftlig før vi starter.",
-    },
   ],
 };
 
@@ -254,8 +254,6 @@ export const formCopy = {
   eyebrow: "Fotoklar-pakken",
   title: "Få fast pris før fotodagen.",
   lead: befaringLine,
-  /** The one place the private seller is spoken to directly. */
-  note: "Selger du boligen din selv? Bruk det samme skjemaet.",
   formLead: "Fem felt, og vi ringer deg raskt. Da spør vi om fotodagen.",
   fields: [
     {
@@ -332,7 +330,7 @@ export const privacy = {
     {
       h: "Hva vi samler inn",
       body: [
-        "Skjemaet har fem felt: navn, telefonnummer, e-postadresse, adressen til huset som skal vaskes og postnummer.",
+        "Skjemaet har fem felt: navn, telefonnummer, e-postadresse, adressen til boligen som skal vaskes og postnummer.",
         "I tillegg lagres hvilken side skjemaet ble sendt fra og tidspunktet det kom inn. Vi ber aldri om fødselsnummer eller betalingsopplysninger i skjemaet.",
       ],
     },

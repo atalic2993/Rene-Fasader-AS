@@ -5,7 +5,7 @@ import { areaList, kommuner, type Kommune } from "./kommuner";
 import { site } from "./site";
 
 export function pageMetadata(kommune: Kommune, path: string): Metadata {
-  const title = `Fasadevask i ${kommune.name} før fotografen kommer | ${site.shortName}`;
+  const title = `Fasadevask for meglere i ${kommune.name}, før fotodagen | ${site.shortName}`;
   const description = `For meglere i ${kommune.name}: fasadevask uten høytrykk før fotodagen. Hele boligen ren, helt opp til mønet, på én dag, med fast pris skriftlig før vi starter. Utført av Norgesmester i vinduspuss 2023.`;
   const url = `${site.baseUrl}${path}`;
 

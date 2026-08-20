@@ -25,11 +25,6 @@ export default function FormSection({ kommune }: { kommune: Kommune }) {
               {befaringLine}
             </p>
 
-            {/* the private seller, told in one line that the form is his too */}
-            <p className="mt-4 max-w-[32rem] text-sm text-white/60">
-              {formCopy.note}
-            </p>
-
             <ul className="mt-7 space-y-3 border-t border-white/15 pt-6 sm:mt-8 sm:pt-6">
               {proofChips.map((chip) => (
                 <li key={chip} className="flex items-start gap-3 text-white/80">

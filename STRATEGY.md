@@ -156,8 +156,11 @@ Co-op boards, sameier and commercial buildings were rejected. Section 8 of the
 brief excludes them outright, and boards would put this client head to head
 with Altivon in the same city.
 
-The page now reads to the agent throughout, with the private seller told in two
-places that the same form is his. Every claim on the page is unchanged, because
+The page reads to the agent and to nobody else, on Aaron's instruction of
+2026-08-20. The two lines that spoke to a private seller were removed, the page
+title and social card name the audience, and the scarcity line now says the
+photographer visits the seller rather than the reader. That last edit touches a
+locked line. Every claim on the page is unchanged, because
 the B2B pitch is built only from facts that were already verified: one contact,
 fixed written price, one day, own lift, no scaffolding, nobody needs to be
 present, work planned against the photo date.
