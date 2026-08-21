@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { kommune: slug } = await params;
   const kommune = getKommune(slug);
   if (!kommune) return {};
-  return pageMetadata(kommune, `/fasadevask/${kommune.slug}`);
+  // noindex: five copies of one page with the place name swapped. See lib/seo.ts.
+  return pageMetadata(kommune, `/fasadevask/${kommune.slug}`, { indexable: false });
 }
 
 export default async function Page({ params }: Props) {

@@ -172,7 +172,12 @@ export default function Footer() {
           © {new Date().getFullYear()} {site.name}
         </p>
         <div className="flex flex-wrap gap-x-6 gap-y-2">
-          <Link href={site.privacyUrl} className="transition-colors hover:text-sand">
+          {/* inline-flex + min-h-6 so the tap target clears 24px on a phone,
+              without the text moving */}
+          <Link
+            href={site.privacyUrl}
+            className="inline-flex min-h-6 items-center transition-colors hover:text-sand"
+          >
             {footerCopy.privacyLabel}
           </Link>
         </div>

@@ -35,7 +35,8 @@
   --text-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.3125rem);
   --text-lead--line-height: 1.55;
 
-  --text-eyebrow: 0.6875rem;
+  /* 12px. Uppercase and tracked out, so it needs the extra pixel to stay legible. */
+  --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1;
   --text-eyebrow--letter-spacing: 0.18em;
 
@@ -50,8 +51,20 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    /* keeps anchored sections clear of the fixed header */
-    scroll-padding-top: 6rem;
+    /*
+     * Exactly the sticky header, border included, so an anchored section
+     * lands flush underneath it. Any more and the tail of the section above
+     * stays on screen with its heading sliced in half by the header; any less
+     * and the section tucks under. Nothing may add scroll-mt on top of this.
+     */
+    scroll-padding-top: calc(4rem + 1px);
+  }
+
+  /* the header grows at sm, so the offset grows with it */
+  @media (min-width: 40rem) {
+    html {
+      scroll-padding-top: calc(5rem + 1px);
+    }
   }
 
   body {

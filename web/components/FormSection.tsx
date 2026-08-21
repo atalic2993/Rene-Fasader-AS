@@ -9,7 +9,7 @@ export default function FormSection({ kommune }: { kommune: Kommune }) {
   return (
     <section
       id="skjema"
-      className="relative scroll-mt-24 overflow-hidden bg-petrol-deep py-11 text-white sm:py-20"
+      className="relative overflow-hidden bg-petrol-deep py-11 text-white sm:py-20"
     >
       <FacadeGrid id="form-grid" opacity={0.08} />
 

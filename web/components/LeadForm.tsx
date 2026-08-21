@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 
 import { ctaButton, formCopy } from "@/lib/copy";
 import type { Kommune } from "@/lib/kommuner";
+import { queueLead } from "@/lib/outbox";
 import { site } from "@/lib/site";
 
 type Errors = Partial<Record<string, string>>;
@@ -36,6 +37,26 @@ export function formatPhone(value: string): string {
 }
 
 /**
+ * Every digit in the value, uncapped. Validation counts these rather than the
+ * trimmed four, so a five digit code fails with an error instead of quietly
+ * losing its last digit and reaching the CRM as a different address.
+ */
+function allDigits(value: string): string {
+  return value.replace(/\D/g, "");
+}
+
+/**
+ * A Norwegian postal code is exactly four digits, 0001 to 9999.
+ *
+ * The leading zero is part of the code: 0367 is Oslo, 367 is nothing. That is
+ * why the field is a text input rather than a number input, and why the value
+ * is never parsed as a number anywhere on the way to the CRM.
+ */
+export function postalDigits(value: string): string {
+  return allDigits(value).slice(0, 4);
+}
+
+/**
  * One @, a local part without spaces or stray dots, a domain with at least one
  * dot and a letters-only ending. Deliberately stricter than the browser's own
  * check, which accepts things like "a@b".
@@ -63,7 +84,7 @@ function validate(values: Record<string, string>): Errors {
     errors.adresse = "Skriv inn adressen til eiendommen som skal vaskes.";
   }
 
-  if (!/^\d{4}$/.test(values.postnummer.trim())) {
+  if (!/^\d{4}$/.test(allDigits(values.postnummer))) {
     errors.postnummer = "Postnummer er fire siffer.";
   }
 
@@ -91,6 +112,25 @@ function handlePhoneInput(event: React.FormEvent<HTMLInputElement>) {
     position += 1;
   }
   el.setSelectionRange(position, position);
+}
+
+/**
+ * Holds the postal code to four digits while it is typed.
+ *
+ * Anything that is not a digit is dropped on the way in, so a pasted
+ * "0367 Oslo" lands as 0367 rather than an error message after the fact, and a
+ * fifth digit simply never appears. The caret is counted in digits rather than
+ * characters, so a removed character never pushes the cursor off course.
+ */
+function handlePostalInput(event: React.FormEvent<HTMLInputElement>) {
+  const el = event.currentTarget;
+  const caret = el.selectionStart ?? el.value.length;
+  const digitsBeforeCaret = postalDigits(el.value.slice(0, caret)).length;
+  const next = postalDigits(el.value);
+  if (next === el.value) return;
+
+  el.value = next;
+  el.setSelectionRange(digitsBeforeCaret, digitsBeforeCaret);
 }
 
 export default function LeadForm({ kommune }: { kommune: Kommune }) {
@@ -126,25 +166,44 @@ export default function LeadForm({ kommune }: { kommune: Kommune }) {
 
     setStatus("sending");
 
+    const lead = {
+      ...values,
+      epost: values.epost.trim().toLowerCase(),
+      // the CRM only ever sees the full international number
+      telefon: `+47${phoneDigits(values.telefon)}`,
+      // autofill can set a value without firing an input event, so the
+      // field is trimmed to its four digits once more on the way out
+      postnummer: postalDigits(values.postnummer),
+      kommune: kommune.name,
+      kilde: typeof window === "undefined" ? "" : window.location.href,
+      botfelt: String(formData.get("botfelt") ?? ""),
+    };
+
     try {
       const response = await fetch("/api/skjema", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...values,
-          epost: values.epost.trim().toLowerCase(),
-          // the CRM only ever sees the full international number
-          telefon: `+47${phoneDigits(values.telefon)}`,
-          kommune: kommune.name,
-          kilde: typeof window === "undefined" ? "" : window.location.href,
-          botfelt: String(formData.get("botfelt") ?? ""),
-        }),
+        body: JSON.stringify(lead),
       });
 
-      if (!response.ok) throw new Error(`Status ${response.status}`);
+      if (response.ok) {
+        router.push("/takk");
+        return;
+      }
 
-      router.push("/takk");
+      /*
+       * 5xx means the lead was fine and our side was not: no webhook
+       * configured, or the CRM refused it. Worth holding on to and sending
+       * again later. A 4xx means the endpoint rejected the data itself, and
+       * the identical body would be rejected identically for a week, so it is
+       * only reported, never queued.
+       */
+      if (response.status >= 500) queueLead(lead);
+      setStatus("failed");
     } catch {
+      // Never reached our own origin at all: offline, in a tunnel, or the tab
+      // lost the network mid-flight. Exactly what the outbox is for.
+      queueLead(lead);
       setStatus("failed");
     }
   }
@@ -157,6 +216,7 @@ export default function LeadForm({ kommune }: { kommune: Kommune }) {
           const hasError = Boolean(errors[field.name]);
           const spansFull = i < 1 || field.name === "adresse";
           const isPhone = field.name === "telefon";
+          const isPostal = field.name === "postnummer";
 
           return (
             <div key={field.name} className={spansFull ? "sm:col-span-2" : ""}>
@@ -173,9 +233,16 @@ export default function LeadForm({ kommune }: { kommune: Kommune }) {
                 inputMode={field.inputMode}
                 autoComplete={field.autoComplete}
                 placeholder={field.placeholder}
-                onInput={isPhone ? handlePhoneInput : undefined}
-                // room to type the country code before it is stripped back out
-                maxLength={isPhone ? 15 : undefined}
+                onInput={
+                  isPhone
+                    ? handlePhoneInput
+                    : isPostal
+                      ? handlePostalInput
+                      : undefined
+                }
+                // phone: room to type the country code before it is stripped
+                // back out. postal code: four digits is the whole of it.
+                maxLength={isPhone ? 15 : isPostal ? 4 : undefined}
                 required
                 aria-required="true"
                 aria-invalid={hasError || undefined}

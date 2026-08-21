@@ -352,15 +352,21 @@ export const footerCopy = {
 
 /**
  * The privacy page. Facts only, and only about what this site actually does:
- * five form fields, one relay to the CRM, no trackers.
+ * five form fields, one relay to the CRM, the outbox that holds a failed
+ * submission on the device, and since 2026-08-22 the Meta pixel.
  *
- * If a Meta pixel or any analytics is ever added to this site, the cookie
- * section below stops being true and must be rewritten the same day.
+ * The pixel changed this page. "Informasjonskapsler og måling" and "Hvem som
+ * får se dem" now both name Meta. If the pixel is ever taken off again, or if
+ * anything is added to it, these two sections must be rewritten the same day.
+ *
+ * NOT WRITTEN HERE, ON PURPOSE: a legal basis for the pixel. Marketing cookies
+ * need the visitor's consent, and this page has no consent banner to collect
+ * it. Flagged to Aaron on 2026-08-22, see STRATEGY.md.
  */
 export const privacy = {
   title: "Personvern",
   lead: "Her står det hva som skjer med opplysningene du fyller inn i skjemaet, og hvilke rettigheter du har.",
-  updated: "Sist oppdatert 20. august 2026",
+  updated: "Sist oppdatert 22. august 2026",
   sections: [
     {
       h: "Hvem som behandler opplysningene",
@@ -392,6 +398,7 @@ export const privacy = {
       h: "Hvem som får se dem",
       body: [
         "Opplysningene går til oss som jobber i selskapet, og de lagres i kundesystemet vi bruker til å følge opp henvendelser. Leverandøren av systemet behandler opplysningene på våre vegne, etter avtale, og kan ikke bruke dem til egne formål.",
+        "I tillegg får Meta, selskapet bak Facebook og Instagram, beskjed om at en henvendelse kom inn, slik at vi kan se hvilke annonser som virker. Det står under «Informasjonskapsler og måling» hva Meta får og hvordan du kan unngå det.",
       ],
     },
     {
@@ -402,9 +409,13 @@ export const privacy = {
       ],
     },
     {
-      h: "Informasjonskapsler",
+      h: "Informasjonskapsler og måling",
       body: [
-        "Denne kampanjesiden setter ingen informasjonskapsler til analyse eller markedsføring.",
+        "Denne siden bruker Meta-pikselen. Det er et lite måleskript fra Meta, selskapet bak Facebook og Instagram. Det setter informasjonskapsler og sender IP-adressen din, hvilken side du er inne på og opplysninger om nettleseren din til Meta.",
+        "Vi bruker det til å se hvor mange som kommer inn fra annonsene og hvor mange som tar kontakt, og til å vise annonsene til flere som ligner på dem som gjør det.",
+        "Sender du inn skjemaet, sender kundesystemet vårt også beskjed til Meta om at henvendelsen kom inn. Kontaktopplysningene dine blir da gjort om til en uleselig kode først. Meta kan ikke lese den tilbake, bare sammenligne den med kontoer de har fra før.",
+        "Vil du unngå det, kan du blokkere informasjonskapsler i nettleseren din eller bruke en annonseblokkering. Skjemaet og resten av siden virker som normalt uten.",
+        "Går det galt når du sender skjemaet, for eksempel fordi du mister dekningen, lagrer nettleseren din det du skrev inn på din egen enhet, slik at vi kan ta imot henvendelsen når forbindelsen er tilbake. Opplysningene blir liggende i din egen nettleser, sendes bare til oss, og slettes så snart de er kommet fram. Sender vi dem ikke fram innen en uke, slettes de uansett. Du kan slette dem selv ved å tømme nettleserdataene dine.",
       ],
     },
     {

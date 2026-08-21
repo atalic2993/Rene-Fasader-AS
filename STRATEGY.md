@@ -218,6 +218,37 @@ included, nobody needs to be present.
 It needs the client's written sign-off, and the ad targeting has to move with
 it: the ads still point at homeowners.
 
+## 5d. Meta pixel, 2026-08-22
+
+Pixel `1212583510880115` is on every page, base code only. It fires `PageView`
+and nothing else, on purpose: the `Lead` event is sent server side from the
+GoHighLevel automation over the Conversions API, so a browser `Lead` on top of
+it would count every submission twice.
+
+Two details worth knowing:
+
+- The form sends the visitor to `/takk` with `router.push`, which never loads a
+  new document, so the snippet cannot fire again by itself. `MetaPixel.tsx`
+  fires `PageView` on every path change after the first one, so `/takk` and the
+  municipality pages are counted. Without that, the one page that marks a
+  finished submission would be invisible in Meta.
+- The script is loaded `afterInteractive`, so it is not in the served HTML. It
+  starts after hydration. That is Next's recommended setting for a pixel and
+  keeps it off the critical path.
+
+**The privacy page changed with it.** It used to say the site set no cookies for
+analysis or marketing, which the pixel made false. `Informasjonskapsler og
+måling` now describes the pixel and the server-side event, and `Hvem som får se
+dem` names Meta.
+
+**What is still missing, and it is a legal point, not a technical one:** there
+is no consent banner. Norwegian rules require the visitor's consent before a
+marketing cookie is set, and the pixel sets one on load. The privacy page
+therefore describes the pixel truthfully but claims no legal basis for it. Two
+ways out: add a consent banner that holds the pixel until the visitor accepts,
+or accept the risk knowingly. This is Aaron's call and it is listed as an open
+item below.
+
 ## 6. Open items for the client
 
 1. **Facade-washing imagery.** The `research/materiell` assets never arrived.
@@ -225,18 +256,22 @@ it: the ads still point at homeowners.
 2. **Privacy page.** Written and live at `/personvern`, based only on what this
    site actually does. Two things still need a client answer: whether the CRM
    vendor may be named outright, and whether a retention period should be stated
-   as a number. The cookie section says the page sets none for analysis or
-   marketing, which stops being true the day a Meta pixel is added.
-3. **`LEAD_WEBHOOK_URL`.** Must be set in Vercel before the first ad runs, or
+   as a number. The cookie section was rewritten on 2026-08-22 when the Meta
+   pixel went on, and now describes it.
+3. **Consent banner for the pixel.** There is none. The pixel sets a marketing
+   cookie the moment the page loads, and Norwegian rules want the visitor's
+   consent first. Either hold the pixel behind a banner or take the risk on
+   purpose. Aaron's call, see section 5d.
+4. **`LEAD_WEBHOOK_URL`.** Must be set in Vercel before the first ad runs, or
    leads will not reach the CRM.
-4. **Deadline field.** The brief locks the form to exactly five fields, while the
+5. **Deadline field.** The brief locks the form to exactly five fields, while the
    page says in two places that the first thing asked on the call is when the
    facade has to be finished. The five locked fields stand. Say the word if that
    date should become a sixth field.
-5. **Three questions the page still cannot answer**, all of them B2B: who gets
+6. **Three questions the page still cannot answer**, all of them B2B: who gets
    invoiced when a manager orders on an owner's behalf, whether several
    addresses can be handed over at once rather than one at a time, and whether
    any managing agent may be named as a reference.
-6. **How high does the lift actually reach?** The page now promises to say so at
+7. **How high does the lift actually reach?** The page now promises to say so at
    the site visit rather than guess. A number here would let the page qualify
    harder and waste fewer site visits.

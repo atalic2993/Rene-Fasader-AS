@@ -93,8 +93,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "mangler_webhook" }, { status: 500 });
   }
 
+  /*
+   * Only present on a lead the browser held back and sent again later, so its
+   * absence is the normal case. It is passed straight through so that if a
+   * retry ever lands on top of a delivery that did get through, the two rows
+   * in the CRM carry the same ref and the duplicate is obvious rather than
+   * looking like two enquiries about the same building.
+   */
+  const ref = clean(body.ref, 60);
+
   const payload = {
     ...lead,
+    ...(ref ? { ref } : {}),
     kampanje: "Fasadevask B2B",
     tjeneste: "Fasadevask",
     mottatt: new Date().toISOString(),

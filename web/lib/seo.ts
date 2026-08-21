@@ -4,7 +4,36 @@ import { faq } from "./copy";
 import { areaList, kommuner, type Kommune } from "./kommuner";
 import { site } from "./site";
 
-export function pageMetadata(kommune: Kommune, path: string): Metadata {
+/** The generated card at app/opengraph-image.tsx, as an absolute URL. */
+const ogImage = {
+  url: `${site.baseUrl}/opengraph-image`,
+  width: 1200,
+  height: 630,
+};
+
+type PageOptions = {
+  /**
+   * Whether search engines may index the page.
+   *
+   * The municipality pages are deliberately false. They exist so the largest
+   * line on the page repeats the largest line in the ad, which means all five
+   * are the same page with one place name swapped: identical headings,
+   * identical paragraphs, identical questions. Indexed, that is a set of
+   * doorway pages competing with each other and with the root page, and
+   * Google is entitled to discount the lot. Paid traffic reaches them by URL
+   * and does not care about indexing, so nothing is lost by keeping them out.
+   *
+   * They stay `follow`, so whatever authority they attract still flows on to
+   * the root page, which is the one page here written to be found.
+   */
+  indexable?: boolean;
+};
+
+export function pageMetadata(
+  kommune: Kommune,
+  path: string,
+  { indexable = true }: PageOptions = {},
+): Metadata {
   const title = `Fasadevask i ${kommune.name} uten høytrykk | ${site.shortName}`;
   const description = `Fasadevask i ${kommune.name} for forvaltere, utleiere og meglere. Hele fasaden ren, helt opp til mønet, på én dag, med fast pris skriftlig før vi starter. Egen lift, ingen stillas.`;
   const url = `${site.baseUrl}${path}`;
@@ -20,13 +49,22 @@ export function pageMetadata(kommune: Kommune, path: string): Metadata {
       title,
       description,
       url,
+      /*
+       * Named here rather than left to the file convention. An explicit
+       * openGraph block stops a nested route inheriting the generated card
+       * from app/opengraph-image.tsx, so without this the five municipality
+       * pages share as a bare text link, and the summary_large_image card
+       * below promises a picture that was never sent.
+       */
+      images: [{ ...ogImage, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage.url],
     },
-    robots: { index: true, follow: true },
+    robots: { index: indexable, follow: true },
   };
 }
 
@@ -40,7 +78,14 @@ export function jsonLd(kommune: Kommune, path: string) {
     "@type": "HomeAndConstructionBusiness",
     "@id": `${site.baseUrl}/#organisasjon`,
     name: site.name,
-    url: site.baseUrl,
+    /*
+     * The company's own site, not this campaign. The @id above is what ties
+     * the graph together; url and sameAs are what tell Google the business on
+     * this page is the business at renefasader.no rather than a new one that
+     * happens to share a name and an organisation number.
+     */
+    url: site.mainSite,
+    sameAs: [site.mainSite],
     telephone: `+47${site.phone.replace(/\s/g, "")}`,
     email: site.email,
     image: `${site.baseUrl}/img/oliver-i-arbeid-oslo.jpg`,

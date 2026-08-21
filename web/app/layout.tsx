@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import LeadOutbox from "@/components/LeadOutbox";
+import MetaPixel from "@/components/MetaPixel";
 import { site } from "@/lib/site";
 
 import "./globals.css";
@@ -42,7 +44,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nb-NO" className={generalSans.variable}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <MetaPixel />
+        <LeadOutbox />
+      </body>
     </html>
   );
 }

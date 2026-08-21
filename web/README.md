@@ -69,6 +69,65 @@ server, so a lead posted straight at the endpoint cannot skip the rules:
   not exactly eight digits is rejected rather than guessed at.
 - **`epost`** is trimmed and lower-cased, and must be a real address: one `@`,
   a domain with a dot, and a letters-only ending of at least two characters.
+- **`postnummer`** is four digits, the Norwegian format. The field drops
+  anything that is not a digit as it is typed and stops at four, so a pasted
+  "0367 Oslo" becomes `0367`. It stays a text field on purpose: the leading
+  zero is part of the code, and `0367` is Oslo while `367` is nothing. A five
+  digit code is rejected rather than trimmed to four, which would silently send
+  a different address than the one that was typed.
+
+A retried lead also carries a `ref`. See **Leads that fail to send** below.
+
+## Leads that fail to send
+
+The relay stops a lead being **blocked**. `lib/outbox.ts` stops one being
+**lost**: a phone that hits a tunnel mid-submit, a dead spot in a stairwell, a
+tab closed a second early.
+
+A failed submission is held in `localStorage` and sent again by
+`components/LeadOutbox.tsx`, which is mounted in the root layout and so runs on
+every page. Delivered leads are deleted immediately.
+
+- **Queued** on a network failure or a `5xx`. Both mean the lead was fine and
+  the delivery was not.
+- **Not queued** on a `4xx`. The endpoint rejected the data itself, and the
+  identical body would be rejected identically on every page load for a week.
+- **Caps:** 5 leads, 7 days, 10 attempts. Past any of those it is dropped.
+- **Duplicates:** each held lead carries a `ref` (UUID) that is passed on to the
+  CRM. If a retry ever lands on top of a delivery that did get through, the two
+  rows share a `ref` and the duplicate is obvious rather than looking like two
+  enquiries about the same building.
+
+Every storage read and write is wrapped: private windows and storage-blocking
+settings throw here, and a missing safety net must never take the form down with
+it. The visitor is not told any of this. They were already shown the error and
+the phone number, and that message stays true whether or not the outbox works.
+
+Holding the lead needs no consent, because it is strictly necessary to complete
+the request the visitor themselves made. It is disclosed on `/personvern`, and
+if the rules above change, that page changes the same day.
+
+## Tracking
+
+`components/MetaPixel.tsx` carries the Meta pixel, id in `lib/site.ts`. It is the
+base code and nothing more: `init`, then `PageView`.
+
+**Do not add a Lead event.** The Lead is sent server side from the GoHighLevel
+automation over the Conversions API. A browser Lead on top of that counts every
+submission twice, and the same goes for Contact, CompleteRegistration,
+SubmitApplication and Schedule.
+
+The component also fires `PageView` on client-side path changes, because the form
+reaches `/takk` with `router.push` and the snippet only runs on a real document
+load. The first load is skipped, since the snippet has already counted it.
+
+Two things that look like faults but are not: the snippet is absent from the
+served HTML, because it loads `afterInteractive`, and on `localhost` the real
+library initialises but sends no `/tr` beacon. Confirm delivery in Meta Events
+Manager against the live domain.
+
+Anything that changes here changes `/personvern` the same day. There is no
+consent banner yet, which is an open question for the client rather than a bug.
 
 ## Where the words live
 

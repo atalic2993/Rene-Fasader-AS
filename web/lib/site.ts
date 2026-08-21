@@ -26,6 +26,13 @@ export const site = {
   mainSite: "https://renefasader.no/",
   /** This site's own privacy page. See app/personvern/page.tsx. */
   privacyUrl: "/personvern",
+  /**
+   * Meta pixel, supplied by Aaron on 2026-08-22. Base code only: PageView and
+   * nothing else. The Lead event is sent from the GoHighLevel automation over
+   * the Conversions API, so no browser Lead may ever be added on top of it.
+   * See components/MetaPixel.tsx.
+   */
+  metaPixelId: "1212583510880115",
   /** Set in Vercel. Production domain for canonical + Open Graph URLs. */
   baseUrl:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
