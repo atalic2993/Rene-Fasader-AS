@@ -361,7 +361,10 @@ export const footerCopy = {
  *
  * NOT WRITTEN HERE, ON PURPOSE: a legal basis for the pixel. Marketing cookies
  * need the visitor's consent, and this page has no consent banner to collect
- * it. Flagged to Aaron on 2026-08-22, see STRATEGY.md.
+ * it. Aaron was shown both options on 2026-08-22 and chose to run without one,
+ * accepting the exposure knowingly. That is a decision, not an omission: do
+ * not add a legal basis to the section below, and do not add a banner. If it
+ * is ever reversed, both change together. See STRATEGY.md section 5d.
  */
 export const privacy = {
   title: "Personvern",

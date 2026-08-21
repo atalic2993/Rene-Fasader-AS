@@ -127,7 +127,9 @@ library initialises but sends no `/tr` beacon. Confirm delivery in Meta Events
 Manager against the live domain.
 
 Anything that changes here changes `/personvern` the same day. There is no
-consent banner yet, which is an open question for the client rather than a bug.
+consent banner. Aaron decided on 2026-08-22 to run without one and accept the
+exposure knowingly, so that is settled rather than outstanding. Do not add a
+banner or a legal basis to `/personvern` without revisiting STRATEGY.md 5d.
 
 ## Where the words live
 

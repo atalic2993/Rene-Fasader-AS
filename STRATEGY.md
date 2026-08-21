@@ -241,13 +241,26 @@ analysis or marketing, which the pixel made false. `Informasjonskapsler og
 måling` now describes the pixel and the server-side event, and `Hvem som får se
 dem` names Meta.
 
-**What is still missing, and it is a legal point, not a technical one:** there
-is no consent banner. Norwegian rules require the visitor's consent before a
-marketing cookie is set, and the pixel sets one on load. The privacy page
-therefore describes the pixel truthfully but claims no legal basis for it. Two
-ways out: add a consent banner that holds the pixel until the visitor accepts,
-or accept the risk knowingly. This is Aaron's call and it is listed as an open
-item below.
+**Consent: decided, 2026-08-22. No banner. The risk is accepted knowingly.**
+
+Norwegian rules require the visitor's consent before a marketing cookie is set,
+and the pixel sets one the moment the page loads. There is no banner, so the
+privacy page describes the pixel truthfully and claims no legal basis for it.
+Aaron was shown both options, a banner holding the pixel until the visitor
+accepts or accepting the exposure, and chose the second on 2026-08-22.
+
+This is a settled decision, not an oversight. Do not add a consent banner, and
+do not treat the missing legal basis on `/personvern` as a bug to fix.
+
+What the exposure actually is: an enforcement action from Datatilsynet, most
+realistically reached by way of a complaint from a visitor. The mitigation
+already in place is that the privacy page names the pixel, says what Meta
+receives, and tells the visitor they can block cookies or use an ad blocker
+with the form and the rest of the page still working.
+
+If this is ever revisited, three things change together: the pixel moves behind
+the banner, `Informasjonskapsler og måling` gains the legal basis it currently
+omits, and section 5d here is rewritten. None of them is worth doing alone.
 
 ## 6. Open items for the client
 
@@ -258,12 +271,10 @@ item below.
    vendor may be named outright, and whether a retention period should be stated
    as a number. The cookie section was rewritten on 2026-08-22 when the Meta
    pixel went on, and now describes it.
-3. **Consent banner for the pixel.** There is none. The pixel sets a marketing
-   cookie the moment the page loads, and Norwegian rules want the visitor's
-   consent first. Either hold the pixel behind a banner or take the risk on
-   purpose. Aaron's call, see section 5d.
-4. **`LEAD_WEBHOOK_URL`.** Must be set in Vercel before the first ad runs, or
-   leads will not reach the CRM.
+3. ~~**Consent banner for the pixel.**~~ **Closed 2026-08-22: no banner, the
+   risk is accepted knowingly.** See section 5d. Not to be reopened as a bug.
+4. ~~**`LEAD_WEBHOOK_URL`.**~~ **Closed 2026-08-22:** set in Vercel and verified
+   against the live site. A test lead reached the CRM and was deleted.
 5. **Deadline field.** The brief locks the form to exactly five fields, while the
    page says in two places that the first thing asked on the call is when the
    facade has to be finished. The five locked fields stand. Say the word if that
