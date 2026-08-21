@@ -78,6 +78,23 @@ server, so a lead posted straight at the endpoint cannot skip the rules:
 
 A retried lead also carries a `ref`. See **Leads that fail to send** below.
 
+## Scroll behaviour
+
+`globals.css` sets `scroll-behavior: smooth` so anchor links glide, and
+`<html>` carries `data-scroll-behavior="smooth"`. **Both are required.**
+
+Up to Next 15 the router overrode `scroll-behavior` during a route change.
+Next 16 stopped, so without the attribute the jump to `/takk` after a
+submission became an animated scroll from deep down a very long page. The
+thank-you page is a fraction of that height, so the document collapsed
+underneath the animation and the scroll settled a few hundred pixels down with
+the heading pushed up under the header. Next warns about this in the console.
+
+The only scroll offset is `scroll-padding-top` on `html`, and it equals the
+height of the sticky header. Do not add `scroll-mt-*` to a section on top of
+it: the two stack, and every call to action then lands on the tail of the
+previous section instead of on the form.
+
 ## Leads that fail to send
 
 The relay stops a lead being **blocked**. `lib/outbox.ts` stops one being

@@ -43,7 +43,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nb-NO" className={generalSans.variable}>
+    /*
+     * data-scroll-behavior is not decoration. globals.css sets
+     * scroll-behavior: smooth so anchor links glide, and up to Next 15 the
+     * router quietly overrode that during a route change. Next 16 stopped
+     * doing so, which turned the jump to /takk after a submission into an
+     * animated scroll from deep down a very long page. The thank-you page is a
+     * fraction of that height, so the document collapsed underneath the
+     * animation and it settled hundreds of pixels down, with the heading
+     * pushed up under the header. This attribute asks the router to take the
+     * override back: anchors still glide, route changes land at the top.
+     */
+    <html lang="nb-NO" className={generalSans.variable} data-scroll-behavior="smooth">
       <body className="antialiased">
         {children}
         <MetaPixel />
